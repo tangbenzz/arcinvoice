@@ -1,0 +1,16 @@
+{
+  "name": "arcinvoice-contracts",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Hardhat project for ArcInvoice",
+  "scripts": {
+    "compile": "hardhat compile",
+    "deploy:arc": "hardhat run scripts/deploy.js --network arcTestnet"
+  },
+  "devDependencies": {
+    "@nomicfoundation/hardhat-toolbox": "^5.0.0",
+    "dotenv": "^17.2.3",
+    "hardhat": "^2.26.3",
+    "setprototypeof": "^1.2.0"
+  }
+}

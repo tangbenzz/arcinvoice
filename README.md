@@ -56,3 +56,39 @@ npm run dev
 - The backend can start without `INVOICE_ADDRESS`, but invoice endpoints will fail until a valid contract address is provided.
 - The backend default URL is `http://localhost:8788`.
 - The current RPC target is Arc Testnet.
+
+## Deploy The Contract
+
+1. Install contract dependencies:
+
+```powershell
+cd D:\codex\arcinvoice\contracts
+npm install
+```
+
+2. Create the contract env file:
+
+```powershell
+copy .env.example .env
+```
+
+3. Edit `contracts/.env`:
+
+```env
+PRIVATE_KEY=0xyourprivatekey
+USDC_ADDRESS=0xYourUsdcTokenAddress
+```
+
+4. Deploy to Arc Testnet:
+
+```powershell
+npm run deploy:arc
+```
+
+5. Copy the deployed contract address into `backend/.env`:
+
+```env
+INVOICE_ADDRESS=0xYourDeployedArcInvoiceAddress
+```
+
+After that, restart the backend with `npm run dev`.
