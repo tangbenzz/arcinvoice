@@ -1,0 +1,14 @@
+node_modules/
+.env
+.env.local
+.env.*.local
+
+contracts/cache/
+contracts/artifacts/
+
+frontend/dist/
+frontend/.vite/
+
+*.log
+.DS_Store
+Thumbs.db
