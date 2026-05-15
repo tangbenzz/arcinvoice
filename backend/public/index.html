@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ArcInvoice Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Arc Testnet</p>
+          <h1>ArcInvoice Dashboard</h1>
+          <p class="hero-text">
+            Track invoice activity from your deployed contract and inspect the latest on-chain
+            records in one place.
+          </p>
+        </div>
+        <div class="hero-card">
+          <span class="label">Contract</span>
+          <code id="contractAddress">Loading...</code>
+          <span class="label">API Status</span>
+          <strong id="apiStatus">Checking...</strong>
+        </div>
+      </header>
+
+      <main class="dashboard">
+        <section class="stats-grid" id="statsGrid">
+          <article class="stat-card">
+            <span>Total Invoices</span>
+            <strong id="totalInvoices">-</strong>
+          </article>
+          <article class="stat-card">
+            <span>Open</span>
+            <strong id="openInvoices">-</strong>
+          </article>
+          <article class="stat-card">
+            <span>Paid</span>
+            <strong id="paidInvoices">-</strong>
+          </article>
+          <article class="stat-card">
+            <span>Cancelled</span>
+            <strong id="cancelledInvoices">-</strong>
+          </article>
+          <article class="stat-card">
+            <span>Open Volume</span>
+            <strong id="openVolume">-</strong>
+          </article>
+          <article class="stat-card">
+            <span>Paid Volume</span>
+            <strong id="paidVolume">-</strong>
+          </article>
+        </section>
+
+        <section class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Invoices</p>
+              <h2>Latest Records</h2>
+            </div>
+            <button id="refreshButton" class="refresh-button" type="button">Refresh</button>
+          </div>
+
+          <div id="emptyState" class="empty-state hidden">
+            <h3>No invoices yet</h3>
+            <p>Create an invoice on-chain and refresh this page to see it here.</p>
+          </div>
+
+          <div class="table-wrap">
+            <table id="invoiceTable">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Status</th>
+                  <th>Amount</th>
+                  <th>Creator</th>
+                  <th>Recipient</th>
+                  <th>Due Date</th>
+                  <th>Memo</th>
+                </tr>
+              </thead>
+              <tbody id="invoiceTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script src="/app.js" defer></script>
+  </body>
+  </html>

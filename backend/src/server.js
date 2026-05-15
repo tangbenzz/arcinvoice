@@ -1,6 +1,8 @@
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
 import { createPublicClient, defineChain, formatUnits, getAddress, http, isAddress } from "viem";
 
 const PORT = Number(process.env.PORT || 8788);
@@ -35,6 +37,10 @@ const publicClient = createPublicClient({
   chain: arcTestnet,
   transport: http(ARC_RPC_URL),
 });
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const publicDir = path.resolve(__dirname, "../public");
 
 const invoiceAbi = [
   {
@@ -195,19 +201,22 @@ app.use(
 );
 
 app.use(express.json());
+app.use(express.static(publicDir));
 
 app.get("/", (req, res) => {
-  res.json({
-    name: "ArcInvoice Backend",
-    status: "running",
-    chain: "Arc Testnet",
-    chainId: 5042002,
-    invoiceAddress: INVOICE_ADDRESS,
-  });
+  res.sendFile(path.join(publicDir, "index.html"));
 });
 
 app.get("/health", (req, res) => {
   res.json({ ok: true, timestamp: new Date().toISOString() });
+});
+
+app.get("/api/config", (req, res) => {
+  res.json({
+    chain: "Arc Testnet",
+    chainId: 5042002,
+    invoiceAddress: INVOICE_ADDRESS || null,
+  });
 });
 
 app.get("/api/invoices", async (req, res) => {
